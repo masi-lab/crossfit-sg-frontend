@@ -17,10 +17,11 @@ const useStyles = {
     height: '100vh',
   },
   header: {
-    background: '#fff', padding: 0 
+    background: '#bff', 
+    //paddingLeft: 10
   },
   content: { 
-    margin: '24px 16px 0', 
+    //margin: '24px 16px 0', 
     overflow: 'initial' 
   },
 

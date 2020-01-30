@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+//import { Button } from 'antd';
 import './App.css';
 import MainLayout from './Components/Layout/mainLayout'
 /*
@@ -11,6 +11,6 @@ const App = () => (
 */
 
 const App = () => (
-  <MainLayout></MainLayout>
+  <MainLayout/>
 )
 export default App;
