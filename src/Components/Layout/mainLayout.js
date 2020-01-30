@@ -4,19 +4,19 @@ import useStyles from '../Common/styles'
 import AppMenu from '../Common/AppMenu'
 const { Header, Content, Footer, Sider } = Layout;
 
-const itemsDefault = [
+const items = [
   {
-    name: 'SingleItem',
+    name: 'Hoy',
     icon: 'mail',
     key: 'item1'
   },
   {
-    name: 'ItemWithSubmenu',
+    name: 'Alumnos',
     icon: 'bar-chart',
     key: 'item2',
     subMenu: [
       {
-        name: 'ItemInSub',
+        name: 'Turnos',
         icon: 'fund',
         key: 'item3'
       },
@@ -30,13 +30,12 @@ const itemsDefault = [
 ]
 
 const MainLayout = () => {
-  return(
+  return (
     <Layout style={useStyles.root}>
 
       <Sider style={useStyles.sider}>
 
-        
-        <AppMenu/>
+        <AppMenu items={items} />
 
       </Sider>
 
@@ -47,7 +46,7 @@ const MainLayout = () => {
         </Header>
 
         <Content style={useStyles.content}>
-          <div style={{ padding: 24, background: '#fff', textAlign: 'center',height: '100%' }}>
+          <div style={{ padding: 24, background: '#fff', textAlign: 'center', height: '100%' }}>
             aca el contenido
           </div>
         </Content>
