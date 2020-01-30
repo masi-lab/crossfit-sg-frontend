@@ -4,50 +4,77 @@ import useStyles from '../Common/styles'
 import AppMenu from '../Common/AppMenu'
 const { Header, Content, Footer, Sider } = Layout;
 
+/*
+hoy
+alumnos
+turnos
+estadisticas
+pantalla
+
+config
+*/
+
 const items = [
   {
     name: 'Hoy',
-    icon: 'mail',
-    key: 'item1'
+    icon: 'carry-out',
+    key: 'today',
+    content:<div>hoy</div>
   },
   {
     name: 'Alumnos',
-    icon: 'bar-chart',
-    key: 'item2',
-    subMenu: [
-      {
-        name: 'Turnos',
-        icon: 'fund',
-        key: 'item3'
-      },
-      {
-        name: 'ItemInSub2',
-        icon: 'radar-chart',
-        key: 'item4'
-      },
-    ]
+    icon: 'team',
+    key: 'students',
+    content:<div>alumnos</div>
+  },
+  {
+    name: 'Turnos',
+    icon: 'calendar',
+    key: 'shifts',
+    content:<div>turnos</div>
+  },
+  {
+    name: 'Estadisticas',
+    icon: 'line-chart',
+    key: 'statics',
+    content:<div>estadisticas</div>
+  },
+  {
+    name: 'Pantalla',
+    icon: 'desktop',
+    key: 'screen',
+    content:<div>pantalla</div>
+  },
+  {
+    name: 'Configuracion',
+    icon: 'setting',
+    key: 'settings',
+    content:<div>config</div>
   },
 ]
 
 const MainLayout = () => {
+
+  let [content, setContent] = React.useState('today')
+
   return (
     <Layout style={useStyles.root}>
 
       <Sider style={useStyles.sider}>
 
-        <AppMenu items={items} />
+        <AppMenu items={items} setSelected={setContent}/>
 
       </Sider>
 
       <Layout style={useStyles.workSpace}>
 
         <Header style={useStyles.header}>
-          aca el titulo
+          {content}
         </Header>
 
         <Content style={useStyles.content}>
           <div style={{ padding: 24, background: '#fff', textAlign: 'center', height: '100%' }}>
-            aca el contenido
+            {items.find(item => item.key === content).content}
           </div>
         </Content>
 
@@ -59,9 +86,3 @@ const MainLayout = () => {
 }
 
 export default MainLayout
-
-/*
-<div style={{background: '#f22', padding: 10, height: '100%'}}>
-          aca el menu
-        </div>
-        */

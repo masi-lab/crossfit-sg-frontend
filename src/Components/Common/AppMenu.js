@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
-import logo from '../../logo.png';
+import logo from '../../iwoka.jpg';
 import SubMenu from 'antd/lib/menu/SubMenu';
 
 // minimum keys needed
@@ -18,7 +18,8 @@ const itemsDefault = [
       {
         name: 'ItemInSub',
         icon: 'fund',
-        key: 'item3'
+        key: 'item3',
+        
       },
       {
         name: 'ItemInSub2',
@@ -29,18 +30,19 @@ const itemsDefault = [
   },
 ]
 
-const AppMenu = ({items = itemsDefault, optional}) => {
 
-  console.log(items)
+
+const AppMenu = ({ items = itemsDefault, setSelected }) => { //= s =>{console.log(s)} }
+
   return (
     <div>
 
       <div style={{ height: '200px' }}>
-        <img src={logo} alt="asd">
+        <img style={{ width: '100%' }} src={logo} alt="asd">
         </img>
       </div>
 
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['item1']}>
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[items[0].key]}>
         {
           items.map((item) => (item.hasOwnProperty('subMenu') ?
             <SubMenu key={item.key} title={
@@ -51,7 +53,7 @@ const AppMenu = ({items = itemsDefault, optional}) => {
             }>
               {
                 item.subMenu.map((subItem) => (
-                  <Menu.Item key={subItem.key}>
+                  <Menu.Item key={subItem.key} onClick = {e =>setSelected(subItem.key)}>
                     <Icon type={subItem.icon} />
                     <span className="nav-text">{subItem.name}</span>
                   </Menu.Item>
@@ -59,7 +61,7 @@ const AppMenu = ({items = itemsDefault, optional}) => {
               }
             </SubMenu>
             :
-            <Menu.Item key={item.key}>
+            <Menu.Item key={item.key} onClick = {e =>setSelected(item.key)}>
               <Icon type={item.icon} />
               <span className="nav-text">{item.name}</span>
             </Menu.Item>
