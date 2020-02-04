@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import useStyles from '../Common/styles'
 import AppMenu from '../Common/AppMenu'
+import Students from '../Students/Students'
 const { Header, Content, Footer, Sider } = Layout;
 
 /*
@@ -25,7 +26,7 @@ const items = [
     name: 'Alumnos',
     icon: 'team',
     key: 'students',
-    content:<div>alumnos</div>
+    content:<Students/>
   },
   {
     name: 'Turnos',
@@ -55,7 +56,7 @@ const items = [
 
 const MainLayout = () => {
 
-  let [content, setContent] = React.useState('today')
+  let [content, setContent] = React.useState('students')
 
   return (
     <Layout style={useStyles.root}>
@@ -73,7 +74,7 @@ const MainLayout = () => {
         </Header>
 
         <Content style={useStyles.content}>
-          <div style={{ padding: 24, background: '#fff', textAlign: 'center', height: '100%' }}>
+          <div style={{padding:'10px',background: '#fff', textAlign: 'center', height: '100%' }}>
             {items.find(item => item.key === content).content}
           </div>
         </Content>

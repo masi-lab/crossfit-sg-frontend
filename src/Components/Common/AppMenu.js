@@ -42,7 +42,7 @@ const AppMenu = ({ items = itemsDefault, setSelected }) => { //= s =>{console.lo
         </img>
       </div>
 
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={[items[0].key]}>
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[items[1].key]}>
         {
           items.map((item) => (item.hasOwnProperty('subMenu') ?
             <SubMenu key={item.key} title={

@@ -17,7 +17,7 @@ const useStyles = {
     height: '100vh',
   },
   header: {
-    background: '#bff', 
+    background: '#ccc', 
     //paddingLeft: 10
   },
   content: { 
@@ -26,6 +26,17 @@ const useStyles = {
   },
 
   // OTHERS?
+
+  StudentsList: {
+    flexGrow: 1,
+    overflowY: 'auto',
+    height: '100%', // content cant have this bcse has the toolbar
+    //padding: theme.spacing(3),
+    display: 'grid',
+    gridTemplateColumns: 'minmax(0, 1fr)',// almost equals to '50% 50%',
+    gridTemplateRows: '32px minmax(0, 1fr) 40px', // almost equal to '100%',
+    gridGap: '15px'
+  },
 
 }
 
