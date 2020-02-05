@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Pagination, Table, Avatar, Button } from 'antd';
+import { Input, Pagination, Table, Avatar, Button, Modal } from 'antd';
 import useStyles from '../Common/styles'
 
 const { Search } = Input;
@@ -26,7 +26,7 @@ const columns = [
     title: 'Action',
     key: 'action',
     render: (text, record) => (
-      <Button type="primary" shape="circle" icon="menu" />
+      <Button type="link" icon="more" />
     ),
   },
 ];
@@ -66,18 +66,22 @@ const Students = () => {
 
       <Search placeholder="Buscar" onSearch={value => console.log(value)} enterButton />
       <Table style={{ height: '100%' }} columns={columns} dataSource={data} pagination={false} />
-      <div style={{display:'grid', width:'100%', height: '100%',
+      <div style={{
+        display: 'grid', width: '100%', height: '100%',
         gridTemplateColumns: '200px minmax(0, 1fr) 200px',
-        gridTemplateRows: 'minmax(0, 1fr)',gridGap: '15px'}}>
-        
-        <div/>
+        gridTemplateRows: 'minmax(0, 1fr)', gridGap: '15px'
+      }}>
+
+        <div />
 
         <Pagination total={10000} defaultCurrent={1} pageSize={25} onChange={(asd, qwe) => (console.log('cambie de pagina! ', asd, qwe))} />
-        
+
         <Button type="primary" icon="user-add">
           Agregar Alumno
         </Button>
       </div>
+
+      
 
 
     </div>)
@@ -88,3 +92,42 @@ const Students = () => {
 
 
 export default Students;
+
+
+/*
+
+<Modal
+        title="Basic Modal"
+        
+        visible={true}
+        //onOk={this.handleOk}
+        //mask={false}
+        maskClosable={false}
+        centered
+      //onCancel={this.handleCancel}
+      //okButtonProps={{ disabled: true }}
+      //cancelButtonProps={{ disabled: true }}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <Modal
+          width = '200'
+          title="recharge Modal"
+          visible={true}
+          //onOk={this.handleOk}
+          mask={false}
+          maskClosable={false}
+          centered
+        //onCancel={this.handleCancel}
+        //okButtonProps={{ disabled: true }}
+        //cancelButtonProps={{ disabled: true }}
+        >
+          <p style ={{ width:'1200px' }}>The intasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasderior counts</p>
+        
+
+        </Modal>
+
+      </Modal>
+
+*/
