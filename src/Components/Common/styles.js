@@ -38,6 +38,14 @@ const useStyles = {
     gridGap: '15px'
   },
 
+  itemFormLabel:{
+    justifySelf: 'end', alignSelf: 'center'
+  },
+
+  itemFormInput:{
+    justifySelf: 'start', alignSelf: 'center'
+  },
+
 }
 
 

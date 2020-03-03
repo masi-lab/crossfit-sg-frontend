@@ -2,6 +2,8 @@ import React from 'react';
 import { Input, Pagination, Table, Avatar, Button, Modal } from 'antd';
 import useStyles from '../Common/styles'
 
+import ModalStudentForm from './ModalStudentForm'
+
 const { Search } = Input;
 
 const columns = [
@@ -82,6 +84,8 @@ const Students = () => {
       </div>
 
       
+      <ModalStudentForm/>
+
 
 
     </div>)
@@ -98,7 +102,7 @@ export default Students;
 
 <Modal
         title="Basic Modal"
-        
+
         visible={true}
         //onOk={this.handleOk}
         //mask={false}
@@ -124,7 +128,7 @@ export default Students;
         //cancelButtonProps={{ disabled: true }}
         >
           <p style ={{ width:'1200px' }}>The intasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasderior counts</p>
-        
+
 
         </Modal>
 
