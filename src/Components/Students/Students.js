@@ -84,7 +84,7 @@ const Students = () => {
       </div>
 
       
-      
+      <ModalStudentForm/>
 
 
 
