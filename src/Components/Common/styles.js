@@ -17,7 +17,7 @@ const useStyles = {
     height: '100vh',
   },
   header: {
-    background: '#ccc', 
+    //background: '#ccc', 
     //paddingLeft: 10
   },
   content: { 

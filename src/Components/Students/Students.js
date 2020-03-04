@@ -84,7 +84,7 @@ const Students = () => {
       </div>
 
       
-      <ModalStudentForm/>
+      
 
 
 
@@ -92,7 +92,7 @@ const Students = () => {
 }
 
 
-
+//<ModalStudentForm/>
 
 
 export default Students;
