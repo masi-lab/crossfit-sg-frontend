@@ -5,8 +5,10 @@ import moment from 'moment';
 
 const { Text } = Typography
 const { TextArea } = Input;
+//const createStudent
 
-const newUser = {
+
+const newStudent = {
   firstName: '',
   lastName: '',
   birthday: '',
@@ -17,12 +19,21 @@ const newUser = {
   phone: '',
 }
 
-const StudentForm = () => {
+const StudentForm = (props) => {
   const dateFormat = 'DD/MM/YYYY'
 
-  function onChange(date, dateString) {
-    console.log(date, dateString);
-  }
+  const {
+    firstName, setFirstName,
+    lastName, setLastName,
+    birthday, setBirthday,
+    DNI, setDNI,
+    address, setAddress,
+    comment, setComment,
+    email, setEmail,
+    phone, setPhone,
+  } = props.student
+
+
   return (
     <div style={{
       height: '100%', width: '100%',
@@ -31,7 +42,7 @@ const StudentForm = () => {
       //gridTemplateRows: '40px 40px 40px', // almost equal to '100%',
       gridGap: '7px',
       padding: '10px',
-      gridTemplateAreas:`
+      gridTemplateAreas: `
       "l1 l1 l1 l2 l2 l2" 
       "i1 i1 i1 i2 i2 i2"
       "l3 l3 l4 l4 l5 l5"
@@ -45,30 +56,66 @@ const StudentForm = () => {
 
     }}>
 
-      <Text strong style={{gridArea:'l1'}}>Nombre:</Text>
-      <Input style={{gridArea:'i1'}} placeholder="Roman / Valeria" />
+      <Text strong style={{ gridArea: 'l1' }}>Nombre:</Text>
+      <Input
+        style={{ gridArea: 'i1' }}
+        placeholder="Roman / Valeria"
+        value={firstName}
+        onChange={e => { setFirstName(e.target.value) }}
+      />
 
-      <Text strong style={{gridArea:'l2'}}>Apellido:</Text>
-      <Input style={{gridArea:'i2'}} placeholder="Perez / Hernandez" />
+      <Text strong style={{ gridArea: 'l2' }}>Apellido:</Text>
+      <Input style={{ gridArea: 'i2' }}
+        placeholder="Perez / Hernandez"
+        value={lastName}
+        onChange={e => { setLastName(e.target.value) }}
+      />
 
-      <Text strong style={{gridArea:'l3'}}>DNI:</Text>
-      <Input strong style={{gridArea:'i3'}} placeholder="33444555" />
+      <Text strong style={{ gridArea: 'l3' }}>DNI:</Text>
+      <Input strong style={{ gridArea: 'i3' }}
+        placeholder="33444555"
+        value={DNI}
+        onChange={e => { setDNI(e.target.value) }}
+      />
 
-      <Text strong style={{gridArea:'l4'}}>Telefono / Celular:</Text>
-      <Input style={{gridArea:'i4'}} placeholder="0340215665103" />
+      <Text strong style={{ gridArea: 'l4' }}>Telefono / Celular:</Text>
+      <Input style={{ gridArea: 'i4' }}
+        placeholder="0340215665103"
+        value={phone}
+        onChange={e => { setPhone(e.target.value) }}
+      />
 
-      <Text strong style={{gridArea:'l5'}}>Fecha de Nacimiento:</Text>
-      <DatePicker style={{gridArea:'i5'}} defaultPickerValue={moment('01/01/1990', dateFormat)} placeholder="Ej: 01/01/1990" format={dateFormat} />
+      <Text strong style={{ gridArea: 'l5' }}>Fecha de Nacimiento:</Text>
+      <DatePicker style={{ gridArea: 'i5' }}
+        defaultPickerValue={moment('01/01/1990', dateFormat)}
+        placeholder="Ej: 01/01/1990"
+        format={dateFormat}
+        //value={firstName}
+        onChange={(d, ds) => { setBirthday(ds) }}
+      />
 
 
-      <Text strong style={{gridArea:'l6'}}>Direccion:</Text>
-      <Input style={{gridArea:'i6'}} placeholder="Alberdi 1780" />
+      <Text strong style={{ gridArea: 'l6' }}>Direccion:</Text>
+      <Input style={{ gridArea: 'i6' }}
+        placeholder="Alberdi 1780"
+        value={address}
+        onChange={e => { setAddress(e.target.value) }}
+      />
 
-      <Text strong style={{gridArea:'l7'}}>Email:</Text>
-      <Input style={{gridArea:'i7'}} placeholder="Ej. alguien123@gmail.com" />
+      <Text strong style={{ gridArea: 'l7' }}>Email:</Text>
+      <Input style={{ gridArea: 'i7' }}
+        placeholder="Ej. alguien123@gmail.com"
+        value={email}
+        onChange={e => { setEmail(e.target.value) }}
+      />
 
-      <Text strong style={{gridArea:'l8'}}>Notas:</Text>
-      <TextArea style={{gridArea:'i8'}} rows={3} placeholder="Ej: Falta traer fotocopia DNI" autoSize={{ minRows: 3, maxRows: 3 }} />
+      <Text strong style={{ gridArea: 'l8' }}>Notas:</Text>
+      <TextArea style={{ gridArea: 'i8' }}
+        rows={3} placeholder="Ej: Falta traer fotocopia DNI"
+        autoSize={{ minRows: 3, maxRows: 3 }}
+        value={comment}
+        onChange={e => { setComment(e.target.value) }}
+      />
 
     </div>
   )

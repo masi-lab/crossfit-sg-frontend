@@ -4,6 +4,8 @@ import useStyles from '../Common/styles'
 
 import ModalStudentForm from './ModalStudentForm'
 
+import { getAllStudents } from '../../dataFetcher'
+
 const { Search } = Input;
 
 const columns = [
@@ -14,15 +16,21 @@ const columns = [
     render: (asd) => <Avatar icon="user" />,
   },
   {
-    title: 'Nombre y Apellido',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Nombre',
+    dataIndex: 'firstName',
+    key: 'firstName',
+    //render: text => <a>{text}</a>,
+  },
+  {
+    title: 'Apellido',
+    dataIndex: 'lastName',
+    key: 'lastName',
     //render: text => <a>{text}</a>,
   },
   {
     title: 'Dni',
-    dataIndex: 'dni',
-    key: 'dni',
+    dataIndex: 'DNI',
+    key: 'DNI',
   },
   {
     title: 'Action',
@@ -56,11 +64,29 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ]
-
+// timer para delay de busqueda
+let timer = null
 
 const Students = () => {
 
+  const [data, setData] = React.useState([])
+  const [visibleAddModal, setVisibleAddModal] = React.useState(true)
   console.log('Estoy cargando los datos')
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      let result = await getAllStudents({pag:1,limit:10})
+      console.log(result)
+      setData(result.data.getAllUser)
+
+    };
+
+    //DELAY para evitar catastrofe de que lleguen datos mientras pediste otros
+    //75 es suficiente para buscar por palabra
+    clearTimeout(timer)
+    timer = setTimeout(fetchData, 35)
+
+  }, []);
 
 
   return (
@@ -78,13 +104,16 @@ const Students = () => {
 
         <Pagination total={10000} defaultCurrent={1} pageSize={25} onChange={(asd, qwe) => (console.log('cambie de pagina! ', asd, qwe))} />
 
-        <Button type="primary" icon="user-add">
+        <Button type="primary" 
+        icon="user-add"
+        onClick={(e)=>(setVisibleAddModal(true))}
+        >
           Agregar Alumno
         </Button>
       </div>
 
       
-      <ModalStudentForm/>
+      <ModalStudentForm visible={visibleAddModal} setVisible={setVisibleAddModal}/>
 
 
 
