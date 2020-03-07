@@ -16,7 +16,8 @@ mutation($student: newUser! ) {
   addUser(user:$student){
     DNI,
     firstName,
-    lastName
+    lastName,
+    id
   }
 }`
 
@@ -25,7 +26,8 @@ query($pagination: pagination! ) {
   getAllUser(pagination:$pagination){
     DNI,
     firstName,
-    lastName
+    lastName,
+    id
   }
 }`
 

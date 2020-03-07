@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Pagination, Table, Avatar, Button, Modal } from 'antd';
+import { Input, Pagination, Table, Avatar, Button, Modal, Menu, Dropdown, Icon } from 'antd';
 import useStyles from '../Common/styles'
 
 import ModalStudentForm from './ModalStudentForm'
@@ -7,6 +7,16 @@ import ModalStudentForm from './ModalStudentForm'
 import { getAllStudents } from '../../dataFetcher'
 
 const { Search } = Input;
+
+const capitalize = function(str){
+  str = str.split(" ");
+
+  for (var i = 0, x = str.length; i < x; i++) {
+      str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+  }
+
+  return str.join(" ");
+}
 
 const columns = [
   {
@@ -19,24 +29,28 @@ const columns = [
     title: 'Nombre',
     dataIndex: 'firstName',
     key: 'firstName',
-    //render: text => <a>{text}</a>,
+    render: text => (capitalize(text)),
   },
   {
     title: 'Apellido',
     dataIndex: 'lastName',
     key: 'lastName',
-    //render: text => <a>{text}</a>,
+    render: text => (capitalize(text)),
   },
   {
     title: 'Dni',
     dataIndex: 'DNI',
     key: 'DNI',
+    render: text => (capitalize(text)),
   },
   {
-    title: 'Action',
+    title: 'Accion',
     key: 'action',
     render: (text, record) => (
-      <Button type="link" icon="more" />
+      <Dropdown overlay={menu(record)} trigger={['click']}>
+        <Button type="link" icon="more" onClick={(e, v) => (console.log(record))} />
+      </Dropdown>
+
     ),
   },
 ];
@@ -64,18 +78,39 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ]
+
+const menu = (record) => (
+  <Menu>
+    <Menu.Item>
+      <Icon type="info-circle" style={{ color: 'blue' }} />
+      Detalles
+    </Menu.Item>
+    <Menu.Item onClick={(e) => (console.log('vamos a borrar a ', record.firstName))} >
+      <Icon type="edit" style={{ color: 'orange' }} />
+      Editar
+    </Menu.Item>
+    <Menu.Item>
+      <Icon type="file-add" style={{ color: 'green' }} />
+      Cargar Clases
+    </Menu.Item>
+    <Menu.Item onClick={(e) => (console.log('vamos a borrar a ', record.id))}>
+      <Icon type="delete" style={{ color: 'red' }}/>
+      Borrar
+    </Menu.Item>
+  </Menu>
+);
 // timer para delay de busqueda
 let timer = null
 
 const Students = () => {
 
   const [data, setData] = React.useState([])
-  const [visibleAddModal, setVisibleAddModal] = React.useState(true)
+  const [visibleAddModal, setVisibleAddModal] = React.useState(false)
   console.log('Estoy cargando los datos')
 
   React.useEffect(() => {
     const fetchData = async () => {
-      let result = await getAllStudents({pag:1,limit:10})
+      let result = await getAllStudents({ pag: 1, limit: 10 })
       console.log(result)
       setData(result.data.getAllUser)
 
@@ -104,16 +139,16 @@ const Students = () => {
 
         <Pagination total={10000} defaultCurrent={1} pageSize={25} onChange={(asd, qwe) => (console.log('cambie de pagina! ', asd, qwe))} />
 
-        <Button type="primary" 
-        icon="user-add"
-        onClick={(e)=>(setVisibleAddModal(true))}
+        <Button type="primary"
+          icon="user-add"
+          onClick={(e) => (setVisibleAddModal(true))}
         >
           Agregar Alumno
         </Button>
       </div>
 
-      
-      <ModalStudentForm visible={visibleAddModal} setVisible={setVisibleAddModal}/>
+
+      <ModalStudentForm visible={visibleAddModal} setVisible={setVisibleAddModal} />
 
 
 
@@ -125,42 +160,3 @@ const Students = () => {
 
 
 export default Students;
-
-
-/*
-
-<Modal
-        title="Basic Modal"
-
-        visible={true}
-        //onOk={this.handleOk}
-        //mask={false}
-        maskClosable={false}
-        centered
-      //onCancel={this.handleCancel}
-      //okButtonProps={{ disabled: true }}
-      //cancelButtonProps={{ disabled: true }}
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <Modal
-          width = '200'
-          title="recharge Modal"
-          visible={true}
-          //onOk={this.handleOk}
-          mask={false}
-          maskClosable={false}
-          centered
-        //onCancel={this.handleCancel}
-        //okButtonProps={{ disabled: true }}
-        //cancelButtonProps={{ disabled: true }}
-        >
-          <p style ={{ width:'1200px' }}>The intasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasdintasdasdasdasdasdasdasdasderior counts</p>
-
-
-        </Modal>
-
-      </Modal>
-
-*/
