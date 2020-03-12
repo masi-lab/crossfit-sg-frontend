@@ -72,7 +72,7 @@ const StudentForm = (props) => {
       />
 
       <Text strong style={{ gridArea: 'l3' }}>DNI:</Text>
-      <Input strong style={{ gridArea: 'i3' }}
+      <Input style={{ gridArea: 'i3' }}
         placeholder="33444555"
         value={DNI}
         onChange={e => { setDNI(e.target.value) }}

@@ -18,7 +18,7 @@ const ModalStudentForm = (props) => {
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
 
-  const clearStudent = () =>{
+  const clearStudent = () => {
     setFirstName('')
     setLastName('')
     setBirthday('')
@@ -48,21 +48,26 @@ const ModalStudentForm = (props) => {
   const okHandler = async (e) => {
     console.log('asd')
     let result = await createStudent({ DNI, firstName, lastName })
-
+    /*
+      TODO: interpretador de errores para msj mejorados
+    */
     if (result.errors) {
+      console.log(result.errors)
       result.errors.forEach((e) => e.extensions.exception.details.forEach((m) => (
         message.error(m.message)
       )
       )
       )
     }
-    //message.error(e.message)
-    try {
-      console.log(result.errors[0].extensions.exception.details[0].message)
-    }
-    catch{
 
+    if (!result.errors){
+      console.log(result)
+      let msg = `Se ha creado con exito el estudiante ${result.data.addUser.firstName} ${result.data.addUser.lastName}`
+
+      message.success(result.data.addUser.firstName, result.data.addUser.lastName)
     }
+
+
   }
 
 

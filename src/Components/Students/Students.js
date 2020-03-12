@@ -8,6 +8,10 @@ import { getAllStudents } from '../../dataFetcher'
 
 const { Search } = Input;
 
+function isString(x) {
+  return (typeof x === 'string' || x instanceof String)
+}
+
 const capitalize = function(str){
   str = str.split(" ");
 
@@ -29,13 +33,13 @@ const columns = [
     title: 'Nombre',
     dataIndex: 'firstName',
     key: 'firstName',
-    render: text => (capitalize(text)),
+    render: text => (isString(text)?capitalize(text):''),
   },
   {
     title: 'Apellido',
     dataIndex: 'lastName',
     key: 'lastName',
-    render: text => (capitalize(text)),
+    render: text => (isString(text)?capitalize(text):''),
   },
   {
     title: 'Dni',
@@ -54,6 +58,10 @@ const columns = [
     ),
   },
 ];
+
+/*
+TODO PROTEGER DE SERVER DOWN
+*/
 
 const data = [
   {
@@ -111,8 +119,8 @@ const Students = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       let result = await getAllStudents({ pag: 1, limit: 10 })
-      console.log(result)
-      setData(result.data.getAllUser)
+      console.log(result.data.getAllUser.users)
+      setData(result.data.getAllUser.users)
 
     };
 

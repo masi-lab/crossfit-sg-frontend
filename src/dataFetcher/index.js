@@ -24,10 +24,19 @@ mutation($student: newUser! ) {
 const getAllStudentsGQL = `
 query($pagination: pagination! ) {
   getAllUser(pagination:$pagination){
-    DNI,
-    firstName,
-    lastName,
-    id
+    users{
+      DNI,
+      firstName,
+      lastName,
+      id
+    }
+    pagination{
+      offset
+      page
+      maxPag
+      limit
+      maxRaw
+    }
   }
 }`
 
@@ -36,14 +45,14 @@ query($pagination: pagination! ) {
 
 const createStudent = async (student) => {
   let response = await fetch(`http://localhost:4002`,
-  gqlReqParser(createStudentGQL, {student:student}));
+    gqlReqParser(createStudentGQL, { student: student }));
   let data = await response.json()
   return data;
 }
 
-const getAllStudents = async(pagination) =>{
+const getAllStudents = async (pagination) => {
   let response = await fetch(`http://localhost:4002`,
-  gqlReqParser(getAllStudentsGQL, {pagination}));
+    gqlReqParser(getAllStudentsGQL, { pagination }));
   let data = await response.json()
   return data;
 }
